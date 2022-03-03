@@ -1,13 +1,13 @@
 # import the pygame module
-from ast import Or
 import time
+import os
 import pygame
 import random
 
 pygame.init()
 screen = pygame.display.set_mode((300, 300))
 screen_x, screen_y = screen.get_size()
-pygame.display.set_caption('Worlde')
+pygame.display.set_caption('Wordle')
 
 words_list = []
 for i in open("words.txt", "r").read().split('\n'):
@@ -20,6 +20,7 @@ rectangles = [[],[],[],[],[],[]]
 possible_letters = []
 for i in range (97,123):
 	possible_letters.append(chr(i))
+# print(possible_letters)
 current_row = 0
 guesses = 0
 end_word = words_list[random.randint(0,len(words_list))].strip()
@@ -137,7 +138,12 @@ init_Rectangles()
 # game loop
 
 def reset():
-	global words, temp_word, rectangles, current_row, guesses, canPress, running, end_word, isWon
+	global words, temp_word, rectangles, current_row, guesses, canPress, running, end_word, isWon, possible_letters
+	print("The word was " + end_word)
+	possible_letters = []
+	for i in range (97,123):
+		possible_letters.append(chr(i))
+	# os.system('cls' if os.name == 'nt' else 'clear')
 	isWon = False
 	words = []
 	temp_word = []
@@ -189,4 +195,3 @@ while running:
 
 	pygame.display.update()
 print("The word was:" + end_word)
-
